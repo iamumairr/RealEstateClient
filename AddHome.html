@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap CSS -->
+  <link href="Assets/css/bootstrap.min.css" rel="stylesheet" />
+
+  <title>Add Home - Real Estate Web Application</title>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="Index.html">Real Estate Management System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="Index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Category.html">Category</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Owner.html">Owner</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Home.html">Homes</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <section class="container mt-2">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="text-center text-info">Add Home</h3>
+        <form>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label">Category</label>
+                <select class="form-select" id="CategoryDropdown">
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Address</label>
+                <input type="text" class="form-control" id="txtAddress" />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Status</label>
+                <select class="form-select" id="txtStatus">
+                  <option value="0">Available</option>
+                  <option value="1">Sold</option>
+                  <option value="2">Off the Market</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Price</label>
+                <input type="number" class="form-control" id="txtPrice" />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Square Foot</label>
+                <input type="number" class="form-control" id="txtSquareFoot" />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">No Of BedRooms</label>
+                <input type="number" class="form-control" id="txtNoOfBedrooms" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label">Zip Code</label>
+                <input type="number" class="form-control" id="txtZipCode" />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">No Of BathRooms</label>
+                <input type="number" class="form-control" id="txtNoOfBathrooms" />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Year Built</label>
+                <input type="date" class="form-control" id="txtYearBuilt" />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Image Url</label>
+                <input type="text" class="form-control" id="txtImageUrl" />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Owner</label>
+                <select class="form-select" id="OwnerDropdown">
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea type="text" class="form-control" id="txtDescription"></textarea>
+              </div>
+              <button class="btn btn-primary" id="btnSubmit" type="button">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+  </section>
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">&copy; 2022 - Real Estate Web Application</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="Assets/js/jquery.min.js"></script>
+  <script src="Assets/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      //Category Dropdown
+      $select = $('#CategoryDropdown');
+      $.ajax(
+        {
+          type: "GET",
+          url: 'https://localhost:7259/api/Category',
+          dataType: 'JSON',
+          success: function (data) {
+            $select.html('<option value="">Select category</option>');
+            $.each(data, function (key, val) {
+              $select.append('<option value="' + val.id + '">' + val.name + '</option>');
+            })
+          },
+          error: function () {
+            $select.html('<option value="-2">Please try again...</option>');
+          }
+        });
+      //Owner Dropdown
+      $select1 = $('#OwnerDropdown');
+      $.ajax(
+        {
+          type: "GET",
+          url: 'https://localhost:7259/api/Owner',
+          dataType: 'JSON',
+          success: function (data) {
+            $select1.html('<option value="">Select Owner</option>');
+            $.each(data, function (key, val) {
+              $select1.append('<option value="' + val.ownerId + '">' + val.name + '</option>');
+            })
+          },
+          error: function () {
+            $select.html('<option value="-2">Please try again...</option>');
+          }
+        });
+
+      //form submit
+      $("#btnSubmit").click(function () {
+        var category = $("#CategoryDropdown").val();
+        var address = $("#txtAddress").val();
+        var status = $("#txtStatus").val();
+        var price = $("#txtPrice").val();
+        var squareFoot = $("#txtSquareFoot").val();
+        var zipCode = $("#txtZipCode").val();
+        var noOfBedrooms = $("#txtNoOfBedrooms").val();
+        var noOfBathrooms = $("#txtNoOfBathrooms").val();
+        var year = $("#txtYearBuilt").val();
+        var imgurl = $("#txtImageUrl").val();
+        var owner = $("#OwnerDropdown").val();
+        var description = $("#txtDescription").val();
+
+        if (category == '') {
+          alert("Select Category");
+        } else if (owner == '') {
+          alert("Select Owner");
+        } else {
+          var home = {
+            categoryId: category, address: address, homeStatus: status,
+            price: price, squareFoot: squareFoot, noOfBedrooms: noOfBedrooms, noOfBathrooms: noOfBathrooms,
+            yearBuilt: year, imageUrl: imgurl, ownerId: owner, description: description, zipCode: zipCode
+          };
+
+          $.ajax({
+            type: "POST",
+            url: "https://localhost:7259/api/Home",
+            data: JSON.stringify(home),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+              alert("Data Submitted with Id: " + response["homeId"] + ".");
+            },
+            failure: function (response) {
+              alert(response.responseText);
+            },
+            error: function (response) {
+              alert(response.responseText);
+            },
+          });
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

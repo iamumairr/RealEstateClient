@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap CSS -->
+  <link href="Assets/css/bootstrap.min.css" rel="stylesheet" />
+
+  <title>Real Estate Web Application</title>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="Index.html">Real Estate Management System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="Index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Category.html">Category</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Owner.html">Owner</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Home.html">Homes</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <section class="container mt-2">
+    <div class="row">
+      <h2 class="text-info text-center">All Homes Data</h2>
+      <br>
+      <div class="col-md-12">
+        <a href="AddHome.html" class="btn btn-primary float-end">Add New Home</a>
+        <div class="row mt-2">
+          <div class="col-md-3">
+            <select class="form-select" id="categoryFilter" title="Category">
+            </select>
+          </div>
+          <div class="col-md-3">
+            <div class="row g-3">
+              <div class="col-sm-7">
+                <input type="number" class="form-control" placeholder="Zip Code" id="txtZipcodeSearch">
+              </div>
+              <div class="col-sm">
+                <button class="btn btn-info" id="SearchByZipCode">Search</button>
+              </div>
+            </div>
+          </div>
+          <div class="col"></div>
+        </div>
+        <div class="row mt-2 g-3">
+          <div class="col-2">
+            <input type="text" class="form-control" placeholder="Price" id="txtPriceSearch">
+          </div>
+          <div class="col-2">
+            <input type="text" class="form-control" placeholder="Square Foot" id="txtSqrFtSearch">
+          </div>
+          <div class="col-2">
+            <input type="text" class="form-control" placeholder="No of Beds" id="txtBedsSearch">
+          </div>
+          <div class="col-2">
+            <input type="text" class="form-control" placeholder="No of Baths" id="txtBathsSearch">
+          </div>
+          <div class="col">
+            <button class="btn btn-info" id="btnMultipleSearch">Search</button>
+          </div>
+        </div>
+        <br />
+        <table class="table table-bordered table-sm table-striped mt-2" id="table">
+          <tr>
+            <th>Home Id</th>
+            <th>Category Id</th>
+            <th>Address</th>
+            <th>Status</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Square Foot</th>
+            <th>No Of Bedrooms</th>
+            <th>No Of Bathrooms</th>
+            <th>Year Built</th>
+            <th>ImageUrl</th>
+            <th>Owner Id</th>
+            <th>Zip Code</th>
+            <th>Action</th>
+          </tr>
+        </table>
+      </div>
+      <br>
+    </div>
+  </section>
+
+  <section class="container mt-2" id="formUpdate">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-center text-info">Update Data</h2>
+        <div class="row">
+          <input type="hidden" id="homeId">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Category</label>
+              <select class="form-select" id="CategoryDropdown">
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Address</label>
+              <input type="text" class="form-control" id="txtAddress" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Status</label>
+              <select class="form-select" id="txtStatus" title="Status">
+                <option value="0">Available</option>
+                <option value="1">Sold</option>
+                <option value="2">Off the Market</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Price</label>
+              <input type="number" class="form-control" id="txtPrice" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Square Foot</label>
+              <input type="number" class="form-control" id="txtSquareFoot" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">No Of BedRooms</label>
+              <input type="number" class="form-control" id="txtNoOfBedrooms" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Zip Code</label>
+              <input type="number" class="form-control" id="txtZipCode" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">No Of BathRooms</label>
+              <input type="number" class="form-control" id="txtNoOfBathrooms" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Year Built</label>
+              <input type="date" class="form-control" id="txtYearBuilt" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Image Url</label>
+              <input type="text" class="form-control" id="txtImageUrl" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Owner</label>
+              <select class="form-select" id="OwnerDropdown">
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Description</label>
+              <textarea type="text" class="form-control" id="txtDescription"></textarea>
+            </div>
+            <button class="btn btn-primary" id="btnSubmit" type="button" onclick="Update()">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">&copy; 2022 - Real Estate Web Application</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="Assets/js/jquery.min.js"></script>
+  <script src="Assets/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      //Category Dropdown
+      $select = $('#categoryFilter');
+      $.ajax(
+        {
+          type: "GET",
+          url: 'https://localhost:7259/api/Category',
+          dataType: 'JSON',
+          success: function (data) {
+            $select.html('<option value="">Select category</option>');
+            $.each(data, function (key, val) {
+              $select.append('<option value="' + val.id + '">' + val.name + '</option>');
+            })
+          },
+          error: function () {
+            $select.html('<option value="-2">Please try again...</option>');
+          }
+        });
+
+      LoadData();
+
+      //Filter data on the base of Category
+      $("#categoryFilter").on("change", function () {
+        var category = $("#categoryFilter").val();
+        $('#table tr').slice(1).remove();
+
+        if (category != "") {
+          $.ajax({
+            url: "https://localhost:7259/api/Home/GetHomesByCategory/" + category,
+            type: "GET",
+            dataType: "json",
+            success: function (data, textStatus, xhr) {
+              if (data.length == 0) {
+                // console.log(data);
+                //  $('#table tr').slice(1).remove();
+              } else {
+                $.each(data, function (i, item) {
+                  var rows =
+                    "<tr>" +
+                    "<td id='homeId'>" + item.homeId + "</td>" +
+                    "<td id='categoryId'>" + item.categoryId + "</td>" +
+                    "<td id='address'>" + item.address + "</td>" +
+                    "<td id='status'>" + item.status + "</td>" +
+                    "<td id='description'>" + item.description + "</td>" +
+                    "<td id='price'>" + item.price + "</td>" +
+                    "<td id='squarefoot'>" + item.squareFoot + "</td>" +
+                    "<td id='noOfBedrooms'>" + item.noOfBedrooms + "</td>" +
+                    "<td id='noOfBathrooms'>" + item.noOfBathrooms + "</td>" +
+                    "<td id='yearBuilt'>" + item.yearBuilt + "</td>" +
+                    "<td id='imgUrl'>" + item.imageUrl + "</td>" +
+                    "<td id='ownerId'>" + item.ownerId + "</td>" +
+                    "<td id='zipCode'>" + item.zipCode + "</td>" +
+                    "<td>" +
+                    '<a class="btn btn-primary btn-sm mx-1" id="EditButton" type="button" href="" onclick="GetById(' + item.homeId + '); return false;">Edit</a><a class="btn btn-danger btn-sm mx-1" type="button" onclick="Delete(' + item.homeId + ')">Delete</a>' +
+                    "</td>" +
+                    "</tr>";
+
+                  $("#table").append(rows);
+
+                });
+              }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+              alert("Result: " + textStatus + " " + errorThrown + " " + xhr.status + " " + xhr.statusText);
+            },
+          });
+
+        } else {
+          alert("Select a Category");
+        }
+      });
+
+      //Filter data on the base of ZipCode
+      $("#SearchByZipCode").on("click", function () {
+        var zipcode = $("#txtZipcodeSearch").val();
+        $('#table tr').slice(1).remove();
+
+        if (zipcode != "") {
+          $.ajax({
+            url: "https://localhost:7259/api/Home/GetHomesByZipCode/" + zipcode,
+            type: "GET",
+            dataType: "json",
+            success: function (data, textStatus, xhr) {
+              if (data.length == 0) {
+
+              } else {
+                $.each(data, function (i, item) {
+                  var rows =
+                    "<tr>" +
+                    "<td id='homeId'>" + item.homeId + "</td>" +
+                    "<td id='categoryId'>" + item.categoryId + "</td>" +
+                    "<td id='address'>" + item.address + "</td>" +
+                    "<td id='status'>" + item.status + "</td>" +
+                    "<td id='description'>" + item.description + "</td>" +
+                    "<td id='price'>" + item.price + "</td>" +
+                    "<td id='squarefoot'>" + item.squareFoot + "</td>" +
+                    "<td id='noOfBedrooms'>" + item.noOfBedrooms + "</td>" +
+                    "<td id='noOfBathrooms'>" + item.noOfBathrooms + "</td>" +
+                    "<td id='yearBuilt'>" + item.yearBuilt + "</td>" +
+                    "<td id='imgUrl'>" + item.imageUrl + "</td>" +
+                    "<td id='ownerId'>" + item.ownerId + "</td>" +
+                    "<td id='zipCode'>" + item.zipCode + "</td>" +
+                    "<td>" +
+                    '<a class="btn btn-primary btn-sm mx-1" id="EditButton" type="button" href="" onclick="GetById(' + item.homeId + '); return false;">Edit</a><a class="btn btn-danger btn-sm mx-1" type="button" onclick="Delete(' + item.homeId + ')">Delete</a>' +
+                    "</td>" +
+                    "</tr>";
+
+                  $("#table").append(rows);
+                });
+              }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+              alert("Result: " + textStatus + " " + errorThrown + " " + xhr.status + " " + xhr.statusText);
+            },
+          });
+
+        } else {
+          alert("Please enter a value");
+        }
+      });
+
+      //Filter data on the base of multiple Search
+      $("#btnMultipleSearch").on("click", function () {
+        var price = $("#txtPriceSearch").val();
+        var sqrft = $("#txtSqrFtSearch").val();
+        var beds = $("#txtBedsSearch").val();
+        var baths = $("#txtBathsSearch").val();
+        $('#table tr').slice(1).remove();
+
+        if (price == "") {
+          alert("Please enter price.");
+        } else if (sqrft == "") {
+          alert("Please enter Square Foot.");
+        }
+        else if (beds == "") {
+          alert("Please enter No of Beds.");
+        }
+        else if (baths == "") {
+          alert("Please enter No of Baths.");
+        } else {
+          $.ajax({
+            url: "https://localhost:7259/api/Home/GetHomesBySearch",
+            type: "GET",
+            data: { MaxPrice: price, SquareFoot: sqrft, NoOfBeds: beds, NoOfBathrooms: baths },
+            dataType: "json",
+            success: function (data, textStatus, xhr) {
+              if (data.length == 0) {
+                // console.log(data);
+                //  $('#table tr').slice(1).remove();
+              } else {
+                $.each(data, function (i, item) {
+                  var rows =
+                    "<tr>" +
+                    "<td id='homeId'>" + item.homeId + "</td>" +
+                    "<td id='categoryId'>" + item.categoryId + "</td>" +
+                    "<td id='address'>" + item.address + "</td>" +
+                    "<td id='status'>" + item.status + "</td>" +
+                    "<td id='description'>" + item.description + "</td>" +
+                    "<td id='price'>" + item.price + "</td>" +
+                    "<td id='squarefoot'>" + item.squareFoot + "</td>" +
+                    "<td id='noOfBedrooms'>" + item.noOfBedrooms + "</td>" +
+                    "<td id='noOfBathrooms'>" + item.noOfBathrooms + "</td>" +
+                    "<td id='yearBuilt'>" + item.yearBuilt + "</td>" +
+                    "<td id='imgUrl'>" + item.imageUrl + "</td>" +
+                    "<td id='ownerId'>" + item.ownerId + "</td>" +
+                    "<td id='zipCode'>" + item.zipCode + "</td>" +
+                    "<td>" +
+                    '<a class="btn btn-primary btn-sm mx-1" id="EditButton" type="button" href="" onclick="GetById(' + item.homeId + '); return false;">Edit</a><a class="btn btn-danger btn-sm mx-1" type="button" onclick="Delete(' + item.homeId + ')">Delete</a>' +
+                    "</td>" +
+                    "</tr>";
+
+                  $("#table").append(rows);
+                });
+              }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+              alert("Result: " + textStatus + " " + errorThrown + " " + xhr.status + " " + xhr.statusText);
+            },
+          });
+        }
+      });
+    });
+
+    //Load All Records
+    function LoadData() {
+      $.ajax({
+        url: "https://localhost:7259/api/Home",
+        type: "GET",
+        dataType: "json",
+        success: function (data, textStatus, xhr) {
+          $.each(data, function (i, item) {
+            var rows =
+              "<tr>" +
+              "<td id='homeId'>" + item.homeId + "</td>" +
+              "<td id='categoryId'>" + item.categoryId + "</td>" +
+              "<td id='address'>" + item.address + "</td>" +
+              "<td id='status'>" + item.status + "</td>" +
+              "<td id='description'>" + item.description + "</td>" +
+              "<td id='price'>" + item.price + "</td>" +
+              "<td id='squarefoot'>" + item.squareFoot + "</td>" +
+              "<td id='noOfBedrooms'>" + item.noOfBedrooms + "</td>" +
+              "<td id='noOfBathrooms'>" + item.noOfBathrooms + "</td>" +
+              "<td id='yearBuilt'>" + item.yearBuilt + "</td>" +
+              "<td id='imgUrl'>" + item.imageUrl + "</td>" +
+              "<td id='ownerId'>" + item.ownerId + "</td>" +
+              "<td id='zipCode'>" + item.zipCode + "</td>" +
+              "<td>" +
+              '<a class="btn btn-primary btn-sm mx-1" id="EditButton" type="button" href="" onclick="GetById(' + item.homeId + '); return false;">Edit</a><a class="btn btn-danger btn-sm mx-1" type="button" onclick="Delete(' + item.homeId + ')">Delete</a>' +
+              "</td>" +
+              "</tr>";
+            $("#table").append(rows);
+          });
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          alert("Result: " + textStatus + " " + errorThrown + " " + xhr.status + " " + xhr.statusText);
+        },
+      });
+    }
+
+    //Get Data by HomeId
+    function GetById(id) {
+      //Category Dropdown
+      $select = $('#CategoryDropdown');
+      $.ajax(
+        {
+          type: "GET",
+          url: 'https://localhost:7259/api/Category',
+          dataType: 'JSON',
+          success: function (data) {
+            $select.html('<option value="">Select category</option>');
+            $.each(data, function (key, val) {
+              $select.append('<option value="' + val.id + '">' + val.name + '</option>');
+            })
+          },
+          error: function () {
+            $select.html('<option value="-2">Please try again...</option>');
+          }
+        });
+      //Owner Dropdown
+      $select1 = $('#OwnerDropdown');
+      $.ajax(
+        {
+          type: "GET",
+          url: 'https://localhost:7259/api/Owner',
+          dataType: 'JSON',
+          success: function (data) {
+            $select1.html('<option value="">Select Owner</option>');
+            $.each(data, function (key, val) {
+              $select1.append('<option value="' + val.ownerId + '">' + val.name + '</option>');
+            })
+          },
+          error: function () {
+            $select.html('<option value="-2">Please try again...</option>');
+          }
+        });
+
+      $.ajax({
+        url: "https://localhost:7259/api/Home/" + id,
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+          $("#CategoryDropdown").val(data.categoryId);
+          $("#txtAddress").val(data.address);
+          $("#txtStatus").val(data.status);
+          $("#txtPrice").val(data.price);
+          $("#txtSquareFoot").val(data.squareFoot);
+          $("#txtZipCode").val(data.zipCode);
+          $("#txtNoOfBedrooms").val(data.noOfBedrooms);
+          $("#txtNoOfBathrooms").val(data.noOfBathrooms);
+          $("#txtYearBuilt").val(data.yearBuilt);
+          $("#txtImageUrl").val(data.imageUrl);
+          $("#OwnerDropdown").val(data.ownerId);
+          $("#txtDescription").val(data.description);
+          $("#homeId").val(data.homeId);
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          alert("Result: " + textStatus + " " + errorThrown + " " + xhr.status + " " + xhr.statusText);
+        },
+      })
+    }
+
+    //Delete record from Database
+    function Delete(id) {
+      $.ajax({
+        url: "https://localhost:7259/api/Home/" + id,
+        type: "DELETE",
+        dataType: "json",
+        success: function (data, textStatus, xhr) {
+          alert("Data Deleted Successfully");
+          window.location.reload(true);
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          alert("Result: " + textStatus + " " + errorThrown + " " + xhr.status + " " + xhr.statusText);
+        },
+      });
+    }
+
+    //Update record in database
+    function Update() {
+      var category = $("#CategoryDropdown").val();
+      var address = $("#txtAddress").val();
+      var status = $('#txtStatus :selected').val();
+      console.log(status);
+      var price = $("#txtPrice").val();
+      var squareFoot = $("#txtSquareFoot").val();
+      var zipCode = $("#txtZipCode").val();
+      var noOfBedrooms = $("#txtNoOfBedrooms").val();
+      var noOfBathrooms = $("#txtNoOfBathrooms").val();
+      var year = $("#txtYearBuilt").val();
+      var imgurl = $("#txtImageUrl").val();
+      var owner = $("#OwnerDropdown").val();
+      var description = $("#txtDescription").val();
+      var homeId = $("#homeId").val();
+
+      if (category == '') {
+        alert("Select Category");
+      } else if (owner == '') {
+        alert("Select Owner");
+      }
+      else if (yearBuilt == "") {
+        alert("Select Built Year");
+      } else {
+        var home = {
+          homeId: homeId, categoryId: category, address: address, homeStatus: status,
+          price: price, squareFoot: squareFoot, noOfBedrooms: noOfBedrooms, noOfBathrooms: noOfBathrooms,
+          yearBuilt: year, imageUrl: imgurl, ownerId: owner, description: description, zipCode: zipCode
+        };
+
+        $.ajax({
+          type: "PUT",
+          url: "https://localhost:7259/api/Home/" + homeId,
+          data: JSON.stringify(home),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function (response) {
+            alert("Data Updated with Id: " + response["homeId"] + ".");
+            window.location.reload(true);
+          },
+          failure: function (response) {
+            alert(response.responseText);
+          },
+          error: function (response) {
+            alert(response.responseText);
+          },
+        });
+      }
+    }
+  </script>
+</body>
+
+</html>
